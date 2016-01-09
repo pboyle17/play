@@ -1,7 +1,10 @@
 $(document).ready(function(){
   console.log('jquery is loaded!');
+  $('body').append('<div id="container"></div>');
+
 
   getCardData();
+
 
   function getCardData() {
     $.ajax({
@@ -12,8 +15,13 @@ $(document).ready(function(){
         console.dir(data);
 
         data.cards.forEach(function(card){
-          console.log(card.name);
+          $('#container').append('<img class="card" id="'+card.name+'" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid='+card.multiverseid+'&type=card">');
         });
+
+        $('.card').click(function(){
+          console.log(this.id);
+        });
+      
 
       },
       error:function(err){
@@ -21,5 +29,5 @@ $(document).ready(function(){
       }
     });
   }
-  
+
 });
